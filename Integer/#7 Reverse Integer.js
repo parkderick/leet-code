@@ -59,6 +59,6 @@ function reverseInteger(int) {
   return result;
 }
 
-// console.log(reverseInteger(-123));
-// console.log(reverseInteger(123));
-// console.log(reverseInteger(120));
+console.log(reverseInteger(-123));
+console.log(reverseInteger(123));
+console.log(reverseInteger(120));
