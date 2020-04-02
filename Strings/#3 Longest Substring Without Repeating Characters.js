@@ -17,6 +17,9 @@
 // Explanation: The answer is "wke", with the length of 3. 
 //              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
+
+// Time: O(n^2)
+// Space: O(n)
 var lengthOfLongestSubstring = function(s) {
   if (s.length === 1) {
       return 1;
@@ -41,6 +44,31 @@ var lengthOfLongestSubstring = function(s) {
     }
   }
   return longest;
+};
+
+// Time: O(n)
+// Space: O(n)
+var lengthOfLongestSubstring = function(s) {
+  var set = new Set();
+  var start = 0;
+  var end = 0;
+  var counter = 0;
+  var result = 0;
+  var n = s.length;
+  while (start < n && end < n) {
+    if (!set.has(s[end])) {
+      set.add(s[end]);
+      end++;
+      counter++;
+      result = Math.max(result, counter);
+    } else {
+      set.delete(s[start]);
+      start++;
+      counter--;
+      result = Math.max(result, counter);
+    }
+  }
+  return result;
 };
 
 /* TEST */
