@@ -17,8 +17,9 @@ class Stack {
     return this.counter;
   }
   peek() {
-    this.counter--;
-    return this.storage[this.counter];
+    var temp = this.counter;
+    temp--
+    return this.storage[temp];
   }
 }
   
@@ -35,4 +36,4 @@ class Stack {
 //   console.log(stack.peek());
 //   console.log(stack);
   
-  module.exports = Stack;
+module.exports = Stack;
