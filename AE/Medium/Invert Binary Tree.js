@@ -14,4 +14,5 @@ function invertBinaryTree(tree) {
     node.right && inverseTree(node.right);
   }
   inverseTree(tree)
+  return tree;
 }
