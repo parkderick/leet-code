@@ -9,16 +9,43 @@ class AncestralTree {
     }
   }
 
-function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
-  var getDepth = function(node) {
-    var depth = 0;
-    while (node.ancestor) {
-      depth++;
-    }
-    return depth
-  }
-  var depth1 = getDepth(descendantOne);
-  var depth2 = getDepth(descendantTwo);
-  console.log(depth1, depth2)
-
+  function getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo) {
+	var depth1 = depthFinder(descendantOne, topAncestor);
+	var depth2 = depthFinder(descendantTwo, topAncestor);
+	
+	function depthFinder(node, a) {
+		var depth = 0;
+		while (node.name !== a.name) {
+			node = node.ancestor;
+			depth++;
+		}
+		return depth;
+	}
+	
+	var backtrack = 0;
+	
+	var nodeOne = descendantOne;
+	var nodeTwo = descendantTwo;
+	
+	if (depth1 < depth2) {
+		backtrack = depth2 - depth1;
+		nodeTwo = traverse(descendantTwo, backtrack)
+	} else if (depth1 > depth2) {
+		backtrack = depth1 - depth2;
+		nodeOne = traverse(descendantOne, backtrack)
+	}
+	
+	function traverse(node, backtrack) {
+		while (backtrack !== 0) {
+			node = node.ancestor;
+			backtrack--;
+		}
+		return node;
+	}
+	
+	while (nodeOne.name !== nodeTwo.name) {
+		nodeOne = nodeOne.ancestor;
+		nodeTwo = nodeTwo.ancestor;
+	}
+	return nodeOne;
 }
