@@ -29,7 +29,54 @@ var isValid = function(s) {
   return stack.size() !== 0 ? false : true;
 };
 
+
+function isValid(string) {
+  function recurse(str, type) {
+    if (str.length === 0 && type.length === 0) {
+      return true;
+    }
+    if (str.length === 0 && type.length !== 0) {
+      return false;
+    }
+    if (str[0] === "(") {
+      type = ')' + type;
+      return recurse(str.substring(1), type)
+    } else if (str[0] === ')') {
+      if (type[0] === ')') {
+        return recurse(str.substring(1), type.substring(1))
+      } else {
+        return false;
+      }
+    }
+
+    if (str[0] === '{') {
+      type = '}' + type;
+      return recurse(str.substring(1), type)
+    } else if (str[0] === '}') {
+      if (type[0] === '}') {
+        return recurse(str.substring(1), type.substring(1))
+      } else {
+        return false;
+      }
+    }
+    if (str[0] === '[') {
+      type = ']' + type;
+      return recurse(str.substring(1), type)
+    } else if (str[0] === ']') {
+      if (type[0] === ']') {
+        return recurse(str.substring(1), type.substring(1))
+      } else {
+        return false;
+      }
+    }
+  }
+  return recurse(string, '')
+}
+
+
 console.log(isValid('()'));
+console.log(isValid('()()'));
+console.log(isValid('(()'))
 console.log(isValid('()[]{}'));
 console.log(isValid('(]'));
 console.log(isValid('([)]'));
